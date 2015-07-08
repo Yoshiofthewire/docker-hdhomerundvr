@@ -4,7 +4,7 @@
 ln -s -f /bin/true /usr/bin/chfn
 
 apt-get -q update
-apt-get install -qy gdebi-core wget
+apt-get install -qy gdebi-core wget lib32z1 lib32ncurses5 lib32bz2-1.0
 
 #download and install hdhomerun dvr engine
 wget -q --output-document=/tmp/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
