@@ -9,9 +9,10 @@ apt-get install -qy gdebi-core wget
 #download and install hdhomerun dvr engine
 wget -q --output-document=/tmp/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
 cd /tmp
-chmod +x /tmp/hdhomerun_record_linux 
+chmod +x /tmp/hdhomerun_record_linux
+exec /tmp/hdhomerun_record_linux version  
 exec /tmp/hdhomerun_record_linux status
-mv /tmp/hdhomerun_record_x86 /usr/bin/
+mv /tmp/hdhomerun_record_x86 /usr/bin/hdhomerun_record_x86
 chmod +x /usr/bin/hdhomerun_record_x86
 
 # Add hdhomerun dvr to runit
