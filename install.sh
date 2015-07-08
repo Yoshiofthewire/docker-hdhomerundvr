@@ -11,8 +11,11 @@ wget -q --output-document=/tmp/hdhomerun_record_linux http://download.silicondus
 cd /tmp
 chmod +x /tmp/hdhomerun_record_linux
 exec /tmp/hdhomerun_record_linux version  
+exec /tmp/hdhomerun_record_linux status
 cp /tmp/hdhomerun_record_linux /usr/bin/
+cp /tmp/hdhomerun_record_x86 /usr/bin/
 chmod +x /usr/bin/hdhomerun_record_linux
+chmod +x /usr/bin/hdhomerun_record_x86
 
 # Add hdhomerun dvr to runit
 mkdir -p /etc/service/hdhomerun_record
@@ -27,6 +30,7 @@ if [ -d /hdhomerun ]; then
 		chmod -R 777 /hdhomerun
 	fi
 fi
+exec /usr/bin/hdhomerun_record_linux version
 exec /usr/bin/hdhomerun_record_linux start
 EOT
 chmod +x /etc/service/hdhomerun_record/run
