@@ -12,7 +12,7 @@ cd /tmp
 chmod +x /tmp/hdhomerun_record_linux
 exec /tmp/hdhomerun_record_linux version  
 exec /tmp/hdhomerun_record_linux status
-cp /tmp/hdhomerun_record_x86 /usr/bin/
+mv /tmp/hdhomerun_record_x86 /usr/bin/
 chmod +x /usr/bin/hdhomerun_record_x86
 
 # Add hdhomerun dvr to runit
@@ -28,7 +28,6 @@ if [ -d /hdhomerun ]; then
 		chmod -R 777 /hdhomerun
 	fi
 fi
-exec /usr/bin/hdhomerun_record_x86 version
 exec /usr/bin/hdhomerun_record_x86 start
 EOT
 chmod +x /etc/service/hdhomerun_record/run
