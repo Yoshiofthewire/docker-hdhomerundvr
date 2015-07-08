@@ -1,4 +1,4 @@
-FROM phusion/ubuntu-lucid-32:latest
+FROM phusion/baseimage:0.9.16
 MAINTAINER Yoshiofthewire <Yoshi@urlxl.com>
 #Based on the work of needo <needo@superhero.org>
 #Based on the work of Eric Schultz <eric@startuperic.com>
@@ -18,4 +18,4 @@ VOLUME /hdhomerun
 EXPOSE 65001/udp 65002
 
 # Use baseimage-docker's init system
-CMD ["/etc/service/hdhomerun_record/run"]
+CMD ["/sbin/my_init"]
