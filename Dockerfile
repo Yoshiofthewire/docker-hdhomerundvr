@@ -18,4 +18,4 @@ VOLUME /hdhomerun
 EXPOSE 65001/udp 65002
 
 # Use baseimage-docker's init system
-CMD ["/sbin/my_init"]
+CMD ["/etc/service/hdhomerun_record/run"]
