@@ -7,9 +7,9 @@ apt-get -q update
 apt-get install -qy gdebi-core wget
 
 #download and install hdhomerun dvr engine
-wget --output-document=/tmp/hdhomerun/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux_20150705atest2
-chmod +x /tmp/hdhomerun/hdhomerun_record_linux
-exec /tmp/hdhomerun/hdhomerun_record_linux status
+wget -q --output-document=/tmp/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux_20150705atest2
+chmod +x /tmp/hdhomerun_record_linux
+exec /tmp/hdhomerun_record_linux status
 cp /tmp/hdhomerun_record_x86 /usr/bin/hdhomerun_record
 chmod +x /usr/bin/hdhomerun_record
 
