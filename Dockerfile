@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.16
+FROM phusion/ubuntu-lucid-32:latest
 MAINTAINER Yoshiofthewire <Yoshi@urlxl.com>
 #Based on the work of needo <needo@superhero.org>
 #Based on the work of Eric Schultz <eric@startuperic.com>

@@ -3,12 +3,6 @@
 # chfn workaround - Known issue within Dockers
 ln -s -f /bin/true /usr/bin/chfn
 
-cd /etc/apt/sources.list.d
-echo "deb http://old-releases.ubuntu.com/ubuntu/ raring main restricted universe multiverse" >ia32-libs-raring.list
-sudo dpkg --add-architecture i386
-apt-get -q update
-apt-get install -qy ia32-libs
-rm /etc/apt/sources.list.d/ia32-libs-raring.list
 apt-get -q update
 apt-get install -qy gdebi-core wget
 
