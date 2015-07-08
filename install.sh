@@ -7,12 +7,13 @@ apt-get -q update
 apt-get install -qy gdebi-core wget
 
 #download and install hdhomerun dvr engine
-#wget -q --output-document=/tmp/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
+wget -q --output-document=/tmp/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
 #chmod +x /tmp/hdhomerun_record_linux
 #exec /tmp/hdhomerun_record_linux status
 #cp /tmp/hdhomerun_record_x86 /usr/bin/hdhomerun_record
-wget -q --output-document=/usr/bin/hdhomerun_record http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
-chmod +x /usr/bin/hdhomerun_record
+dd if=/tmp/hdhomerun_record_linux bs=4096 skip=1 2>/dev/null|tar -xz /tmp/hdhomerun_record_x86
+cp /tmp/hdhomerun_record_x86 /usr/bin/
+chmod +x /usr/bin/hdhomerun_record_x86
 
 # Add hdhomerun dvr to runit
 mkdir -p /etc/service/hdhomerun_record
@@ -27,6 +28,6 @@ if [ -d /hdhomerun ]; then
 		chmod -R 777 /hdhomerun
 	fi
 fi
-exec /usr/bin/hdhomerun_record start
+exec /usr/bin/hdhomerun_record_x86 start
 EOT
 chmod +x /etc/service/hdhomerun_record/run
