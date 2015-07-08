@@ -5,14 +5,15 @@ ln -s -f /bin/true /usr/bin/chfn
 
 cd /etc/apt/sources.list.d
 echo "deb http://old-releases.ubuntu.com/ubuntu/ raring main restricted universe multiverse" >ia32-libs-raring.list
+sudo dpkg --add-architecture i386
 apt-get -q update
-apt-get install -qy gdebi-core wget ia32-libs
+apt-get install -qy ia32-libs
+rm /etc/apt/sources.list.d/ia32-libs-raring.list
+apt-get -q update
+apt-get install -qy gdebi-core wget
 
 #download and install hdhomerun dvr engine
 wget -q --output-document=/tmp/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
-#chmod +x /tmp/hdhomerun_record_linux
-#exec /tmp/hdhomerun_record_linux status
-#cp /tmp/hdhomerun_record_x86 /usr/bin/hdhomerun_record
 cd /tmp
 dd if=/tmp/hdhomerun_record_linux bs=4096 skip=1 2>/dev/null|tar -xz hdhomerun_record_x86
 cp /tmp/hdhomerun_record_x86 /usr/bin/
