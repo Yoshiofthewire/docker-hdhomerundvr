@@ -3,8 +3,10 @@
 # chfn workaround - Known issue within Dockers
 ln -s -f /bin/true /usr/bin/chfn
 
+cd /etc/apt/sources.list.d
+echo "deb http://old-releases.ubuntu.com/ubuntu/ raring main restricted universe multiverse" >ia32-libs-raring.list
 apt-get -q update
-apt-get install -qy gdebi-core wget lib32z1 lib32ncurses5 lib32bz2-1.0
+apt-get install -qy gdebi-core wget ia32-libs
 
 #download and install hdhomerun dvr engine
 wget -q --output-document=/tmp/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
