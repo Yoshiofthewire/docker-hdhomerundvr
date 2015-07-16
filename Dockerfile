@@ -1,4 +1,4 @@
-FROM 32bit/ubuntu:14.04
+FROM phusion/ubuntu-lucid-32:latest
 MAINTAINER Yoshiofthewire <Yoshi@urlxl.com>
 
 # Set correct environment variables
@@ -14,4 +14,4 @@ VOLUME /hdhomerun
 EXPOSE 65001/udp 65002
 
 # Use baseimage-docker's init system
-#CMD ["/sbin/my_init"]
+CMD ["/sbin/my_init"]
