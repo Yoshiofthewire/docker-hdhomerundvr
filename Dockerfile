@@ -1,4 +1,4 @@
-FROM 32bit/ubuntu${1:-14.04}
+FROM 32bit/ubuntu:test
 MAINTAINER Yoshiofthewire <Yoshi@urlxl.com>
 
 # Set correct environment variables
