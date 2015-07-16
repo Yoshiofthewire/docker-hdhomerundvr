@@ -1,4 +1,4 @@
-FROM phusion/phusion-docker-classic-linux:latest
+FROM phusion/phusion-docker-classic-linux
 MAINTAINER Yoshiofthewire <Yoshi@urlxl.com>
 
 # Set correct environment variables
