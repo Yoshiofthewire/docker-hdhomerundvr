@@ -1,4 +1,4 @@
-FROM mwhiteley/base32:latest
+FROM 32bit/ubuntu${1:-14.04}
 MAINTAINER Yoshiofthewire <Yoshi@urlxl.com>
 
 # Set correct environment variables
