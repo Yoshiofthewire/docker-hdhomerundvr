@@ -1,4 +1,4 @@
-FROM phusion/ubuntu-lucid-32:latest
+FROM phusion/baseimage:0.9.16
 MAINTAINER Yoshiofthewire <Yoshi@urlxl.com>
 
 # Set correct environment variables
