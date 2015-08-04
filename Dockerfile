@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.16
+FROM besn0847/ubuntu32
 MAINTAINER Yoshiofthewire <Yoshi@urlxl.com>
 
 # Set correct environment variables
@@ -14,4 +14,4 @@ VOLUME /hdhomerun
 EXPOSE 65001/udp 65002
 
 # Use baseimage-docker's init system
-CMD ["/sbin/my_init"]
+#CMD ["/sbin/my_init"]
