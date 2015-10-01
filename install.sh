@@ -3,11 +3,6 @@
 # chfn workaround - Known issue within Dockers
 ln -s -f /bin/true /usr/bin/chfn
 
-sudo dpkg --add-architecture i386
-apt-get -q update
-sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
-apt-get install -qy gdebi-core wget
-
 #download and install hdhomerun dvr engine
 wget -q --output-document=/tmp/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
 cd /tmp

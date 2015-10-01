@@ -1,8 +1,13 @@
-FROM besn0847/ubuntu32
+FROM phusion/baseimage:0.9.16
 MAINTAINER Yoshiofthewire <Yoshi@urlxl.com>
 
 # Set correct environment variables
 ENV DEBIAN_FRONTEND="noninteractive" HOME="/root" LC_ALL="C.UTF-8" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
+
+# Install 32bit Executables
+RUN sudo dpkg --add-architecture i386
+RUN sudo apt-get update
+RUN sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
 
 # Install hdhomerun dvr
 ADD hdhomerun.conf /etc/
