@@ -12,7 +12,7 @@ ENV DEBIAN_FRONTEND="noninteractive" HOME="/root" LC_ALL="C.UTF-8" LANG="en_US.U
 # Install hdhomerun dvr
 ADD hdhomerun.conf /etc/
 ADD install.sh /
-RUN bash /install.sh
+#RUN bash /install.sh
 
 VOLUME /hdhomerun
 
