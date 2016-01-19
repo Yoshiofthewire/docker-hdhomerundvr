@@ -10,6 +10,8 @@ usermod -u 99 nobody
 usermod -g 100 nobody
 usermod -d /home nobody
 chown -R nobody:users /home
+apt-get -q update
+apt-get install -qy gdebi-core wget
 
 #########################################
 ##  FILES, SERVICES AND CONFIGURATION  ##
