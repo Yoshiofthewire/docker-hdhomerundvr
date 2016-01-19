@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /tmp/hdhomerun_record_x64 start
