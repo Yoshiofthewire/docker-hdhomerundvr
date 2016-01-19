@@ -1,4 +1,4 @@
-This is a Dockerfile setup for hdhomerun dvr - https://www.silicondust.com/forum/viewforum.php?f=89
+This is a Dockerfile setup for hdhomerun dvr - https://www.silicondust.com/forum/viewforum.php?f=119
 
 To run the latest hdhomerun version:
 

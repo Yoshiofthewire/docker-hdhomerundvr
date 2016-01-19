@@ -30,8 +30,7 @@ mkdir -p /etc/service/hdhomerun
 cat <<'EOT' > /etc/service/hdhomerun/run
 #!/bin/bash
 umask 000
-chown -R nobody:users /opt/hdhomerun
-exec /sbin/setuser nobody /opt/hdhomerun/hdhomerun_record_x64 start
+exec /sbin/setuser nobody /tmp/hdhomerun_record_x64 start
 EOT
 
 chmod -R +x /etc/service/ /etc/my_init.d/
@@ -43,8 +42,6 @@ mkdir -p /opt/hdhomerun
 wget --output-document=/tmp/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
 chmod +x /tmp/hdhomerun_record_linux
 exec /tmp/hdhomerun_record_linux status
-cp /tmp/hdhomerun_record_x64 /opt/hdhomerun/
-chmod +x /opt/hdhomerun/hdhomerun_record_linux
 chmod +x /etc/service/hdhomerun/run
 
 #########################################
@@ -53,4 +50,3 @@ chmod +x /etc/service/hdhomerun/run
 
 # Clean APT install files
 apt-get clean -y
-rm /tmp/*
