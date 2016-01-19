@@ -40,10 +40,12 @@ chmod -R +x /etc/service/ /etc/my_init.d/
 ##             INSTALLATION            ##
 #########################################
 mkdir -p /opt/hdhomerun
-wget --output-document=/opt/hdhomerun/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
+wget --output-document=/tmp/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
+chmod +x /tmp/hdhomerun_record_linux
+exec /tmp/hdhomerun_record_linux status
+cp /tmp/hdhomerun_record_x64 /opt/hdhomerun/
 chmod +x /opt/hdhomerun/hdhomerun_record_linux
-exec /opt/hdhomerun/hdhomerun_record_linux status
-chmod +x /etc/service/hdhomerun_record/run
+chmod +x /etc/service/hdhomerun/run
 
 #########################################
 ##                 CLEANUP             ##
@@ -51,3 +53,4 @@ chmod +x /etc/service/hdhomerun_record/run
 
 # Clean APT install files
 apt-get clean -y
+rm /tmp/*
