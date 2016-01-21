@@ -41,6 +41,8 @@ chmod -R +x /etc/service/ /etc/my_init.d/
 ##             INSTALLATION            ##
 #########################################
 mkdir -p /opt/hdhomerun
+rm /opt/hdhomerun/hdhomerun_record_x64
+rm /tmp/hdhomerun_record_*
 wget --output-document=/tmp/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
 chmod +x /tmp/hdhomerun_record_linux
 exec /tmp/hdhomerun_record_linux status
