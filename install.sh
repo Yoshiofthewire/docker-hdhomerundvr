@@ -32,6 +32,7 @@ cat <<'EOT' > /etc/service/hdhomerun/run
 umask 000
 [[ ! -f /opt/hdhomerun/hdhomerun_record_x64 ]] && cp /tmp/hdhomerun_record_x64 /opt/hdhomerun/
 chown -R nobody:users /opt/hdhomerun
+exec /sbin/setuser nobody /opt/hdhomerun/hdhomerun_record_x64 status
 exec /sbin/setuser nobody /opt/hdhomerun/hdhomerun_record_x64 start
 EOT
 
@@ -45,8 +46,8 @@ rm /opt/hdhomerun/hdhomerun_record_x64
 rm /tmp/hdhomerun_record_*
 wget --output-document=/tmp/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
 chmod +x /tmp/hdhomerun_record_linux
-exec /tmp/hdhomerun_record_linux status
 chmod +x /etc/service/hdhomerun/run
+exec /tmp/hdhomerun_record_linux status
 
 #########################################
 ##                 CLEANUP             ##
