@@ -11,7 +11,7 @@ usermod -g 100 nobody
 usermod -d /home nobody
 chown -R nobody:users /home
 apt-get -q update
-apt-get install -qy gdebi-core wget
+apt-get install -qy gdebi-core
 
 #########################################
 ##  FILES, SERVICES AND CONFIGURATION  ##
@@ -30,7 +30,6 @@ mkdir -p /etc/service/hdhomerun
 cat <<'EOT' > /etc/service/hdhomerun/run
 #!/bin/bash
 umask 000
-[[ ! -f /opt/hdhomerun/hdhomerun_record_x64 ]] && cp /tmp/hdhomerun_record_x64 /opt/hdhomerun/
 chown -R nobody:users /opt/hdhomerun
 exec /sbin/setuser nobody /opt/hdhomerun/hdhomerun_record_x64 start
 exec /sbin/setuser nobody /opt/hdhomerun/hdhomerun_record_x64 version
@@ -41,13 +40,8 @@ chmod -R +x /etc/service/ /etc/my_init.d/
 #########################################
 ##             INSTALLATION            ##
 #########################################
-mkdir -p /opt/hdhomerun
-rm /opt/hdhomerun/hdhomerun_record_x64
-rm /tmp/hdhomerun_record_*
-wget --output-document=/tmp/hdhomerun_record_linux http://download.silicondust.com/hdhomerun/hdhomerun_record_linux
-chmod +x /tmp/hdhomerun_record_linux
+chmod +x /opt/hdhomerun/hdhomerun_record_x64
 chmod +x /etc/service/hdhomerun/run
-exec /tmp/hdhomerun_record_linux status
 
 #########################################
 ##                 CLEANUP             ##

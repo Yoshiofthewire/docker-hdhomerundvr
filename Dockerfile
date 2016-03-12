@@ -15,8 +15,11 @@ CMD ["/sbin/my_init"]
 #########################################
 ##         RUN INSTALL SCRIPT          ##
 #########################################
+
+RUN mkdir -p /opt/hdhomerun
 ADD hdhomerun.conf /etc/
 ADD install.sh /
+ADD hdhomerun_record_x64 /opt/hdhomerun/
 RUN bash /install.sh
 
 
