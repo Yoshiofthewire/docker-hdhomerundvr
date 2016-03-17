@@ -32,7 +32,6 @@ cat <<'EOT' > /etc/service/hdhomerun/run
 umask 000
 chown -R nobody:users /opt/hdhomerun
 exec /sbin/setuser nobody /opt/hdhomerun/hdhomerun_record_x64 start
-exec /sbin/setuser nobody /opt/hdhomerun/hdhomerun_record_x64 version
 EOT
 
 chmod -R +x /etc/service/ /etc/my_init.d/
