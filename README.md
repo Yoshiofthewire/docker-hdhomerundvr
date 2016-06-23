@@ -1,10 +1,14 @@
-This is a Dockerfile setup for hdhomerun dvr - https://www.silicondust.com/forum/viewforum.php?f=119
+This is a Dockerfile setup for HDhomerun DVR - https://www.silicondust.com/forum/viewforum.php?f=119
+HDhomerun DVR Server: 20160621atest1
 
-To run the latest hdhomerun version:
+Before install:
+To update the firmware install the Windows or Mac install and when asked to install the server, select don't.
+Then you will get a prompt to configure the tuner after Setup is complete.
+The re-setup the tuner, which will update the firmware and you may have to re-scan channels.
 
-```
-docker run -d --net="host" --name="hdhomerundvr" -v /path/to/recordings:/hdhomerun -v /etc/localtime:/etc/localtime:ro yoshiof/plex/hdhomerundvr
-```
+unRaid Clients:
+Then check for Docker updates.
+
 
 After install go to:
 
