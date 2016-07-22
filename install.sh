@@ -41,6 +41,7 @@ chmod -R +x /etc/service/ /etc/my_init.d/
 #########################################
 chmod +x /opt/hdhomerun/hdhomerun_record_x64
 chmod +x /etc/service/hdhomerun/run
+chmod 666 /etc/hdhomerun.conf
 
 #########################################
 ##                 CLEANUP             ##
