@@ -16,12 +16,13 @@ CMD ["/sbin/my_init"]
 ##         RUN INSTALL SCRIPT          ##
 #########################################
 
+RUN apt-get install -y supervisor 
 RUN mkdir -p /opt/hdhomerun
 ADD hdhomerun.conf /etc/
 ADD install.sh /
-ADD hdhomerun_record_x64 /opt/hdhomerun/
+ADD hdhomerun_record_linux /opt/hdhomerun/
 RUN bash /install.sh
-
+ADD supervisord.conf supervisord.conf
 
 #########################################
 ##         EXPORTS AND VOLUMES         ##
@@ -30,3 +31,5 @@ RUN bash /install.sh
 VOLUME /hdhomerun
 EXPOSE 65001/udp 65002
 
+CMD ["-n", "-c", "/supervisord.conf"]
+ENTRYPOINT ["/usr/bin/supervisord"]

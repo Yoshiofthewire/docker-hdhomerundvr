@@ -25,22 +25,12 @@ if [[ $(cat /etc/timezone) != $TZ ]] ; then
 fi
 EOT
 
-# hdhomerun
-mkdir -p /etc/service/hdhomerun
-cat <<'EOT' > /etc/service/hdhomerun/run
-#!/bin/bash
-umask 000
-chown -R nobody:users /opt/hdhomerun
-exec /sbin/setuser nobody /opt/hdhomerun/hdhomerun_record_x64 start
-EOT
-
 chmod -R +x /etc/service/ /etc/my_init.d/
 
 #########################################
 ##             INSTALLATION            ##
 #########################################
-chmod +x /opt/hdhomerun/hdhomerun_record_x64
-chmod +x /etc/service/hdhomerun/run
+chmod +x /opt/hdhomerun/hdhomerun_record_linux
 chmod 666 /etc/hdhomerun.conf
 
 #########################################
