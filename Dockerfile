@@ -16,7 +16,6 @@ CMD ["/sbin/my_init"]
 ##         RUN INSTALL SCRIPT          ##
 #########################################
 
-RUN apt-get install -y supervisor 
 RUN mkdir -p /opt/hdhomerun
 ADD hdhomerun.conf /etc/
 ADD install.sh /

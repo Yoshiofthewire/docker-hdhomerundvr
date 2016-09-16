@@ -11,7 +11,7 @@ usermod -g 100 nobody
 usermod -d /home nobody
 chown -R nobody:users /home
 apt-get -q update
-apt-get install -qy gdebi-core
+apt-get install -qy gdebi-core supervisor
 
 #########################################
 ##  FILES, SERVICES AND CONFIGURATION  ##
