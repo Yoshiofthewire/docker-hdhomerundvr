@@ -30,7 +30,7 @@ chmod -R +x /etc/service/ /etc/my_init.d/
 #########################################
 ##             INSTALLATION            ##
 #########################################
-chmod +x /opt/hdhomerun/hdhomerun_record_linux
+chmod +x /opt/hdhomerun/hdhomerun_record_x64
 chmod 666 /etc/hdhomerun.conf
 
 #########################################
