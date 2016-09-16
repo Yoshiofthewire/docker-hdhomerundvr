@@ -19,7 +19,7 @@ CMD ["/sbin/my_init"]
 RUN mkdir -p /opt/hdhomerun
 ADD hdhomerun.conf /etc/
 ADD install.sh /
-ADD hdhomerun_record_linux /opt/hdhomerun/
+ADD hdhomerun_record_x64 /opt/hdhomerun/
 RUN bash /install.sh
 ADD supervisord.conf supervisord.conf
 
