@@ -1,5 +1,5 @@
 This is a Dockerfile setup for HDhomerun DVR - https://www.silicondust.com/forum/viewforum.php?f=119
-HDhomerun DVR Server: 20160809atest2
+HDhomerun DVR Server: 20170512beta1
 
 Before install:
 To update the firmware install the Windows or Mac install and when asked to install the server, select don't.
