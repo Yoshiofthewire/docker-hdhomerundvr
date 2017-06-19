@@ -1,5 +1,5 @@
 This is a Dockerfile setup for HDhomerun DVR - https://www.silicondust.com/forum/viewforum.php?f=119
-HDhomerun DVR Server: 20170512beta1
+HDhomerun DVR Server: 20170612beta3
 
 
 Before install:
