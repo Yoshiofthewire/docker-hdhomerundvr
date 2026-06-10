@@ -26,8 +26,16 @@ Docker container for the [HDHomeRun DVR Server](https://forum.silicondust.com/fo
 
 ## Quick Start
 
+### Option A: Docker Hub
+
+Use the published image from Docker Hub:
+
+https://hub.docker.com/repository/docker/yoshiofthewire/hdhomerundvr/general
+
+### Option B: Build Locally
+
 ```bash
-# 1. Clone the repo
+# 1. Clone the repository
 git clone https://github.com/Yoshiofthewire/docker-hdhomerundvr.git
 cd docker-hdhomerundvr
 
@@ -45,24 +53,26 @@ docker compose up -d --build
 
 ## Configuration
 
+### Environment Variables
+
 | Environment Variable | Default | Description |
 |---|---|---|
 | `TZ` | `UTC` | Timezone (e.g. `America/New_York`, `Europe/London`) |
 
-**Volumes**
+### Volumes
 
 | Container Path | Description |
 |---|---|
 | `/hdhomerun` | Recording output directory — map this to your storage path |
 
-**Ports**
+### Ports
 
 | Port | Protocol | Description |
 |---|---|---|
 | `65001` | UDP | HDHomeRun discovery |
 | `65002` | TCP | DVR control/streaming |
 
-> **Note:** `network_mode: host` is used in `docker-compose.yml` so that UDP broadcast device discovery works correctly. In host mode, the `ports` mapping is bypassed — the ports above are for documentation.
+> **Note:** `network_mode: host` is used in `docker-compose.yml` so that UDP broadcast device discovery works correctly. In host mode, the `ports` mapping is bypassed, so the ports above are documentation only.
 
 ---
 
@@ -81,13 +91,15 @@ Before the first install or when updating firmware:
 
 ## How It Works
 
-```
-Docker container
-└── supervisord (PID 1, nodaemon=true)
-    └── hdhomerun_wrapper.sh
-        ├── Calls: hdhomerun_record_x64 start  (starts DVR daemon)
-        ├── Monitors: DVR process every 15 seconds
-        └── On crash: exits non-zero → supervisord auto-restarts wrapper
+```mermaid
+flowchart TD
+    A[Docker container] --> B[supervisord\nPID 1, nodaemon=true]
+    B --> C[hdhomerun_wrapper.sh]
+    C --> D[hdhomerun_record_x64 start\nStarts DVR daemon]
+    C --> E[Monitors DVR process\nevery 15 seconds]
+    E --> F[If the DVR process disappears, the wrapper exits non-zero]
+    F --> G[supervisord restarts the wrapper\nup to 10 retries]
+    H[SIGTERM from Docker] --> I[Wrapper calls hdhomerun_record_x64 stop]
 ```
 
 - `supervisord` runs as PID 1 in the foreground (`nodaemon=true`), preventing spurious container exits.
