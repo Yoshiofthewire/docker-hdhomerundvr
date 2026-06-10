@@ -14,3 +14,5 @@ services:
       - /mnt/user/recordings:/hdhomerun
     environment:
       - TZ=America/New_York
+    ports:
+      - "65001:65001"

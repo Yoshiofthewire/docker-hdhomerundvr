@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>HDHomeRunDVR</Name>
+  <Repository>yoshiofthewire/hdhomerundvr</Repository>
+  <Registry/>
+  <Network>host</Network>
+  <MyIP/>
+  <MyMAC/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project/>
+  <ReadMe/>
+  <Overview>Docker container for the HDHomeRun DVR Server by SiliconDust.&#13;
+&#13;
+Features&#13;
+Runs the HDHomeRun DVR recording engine inside a Docker container&#13;
+supervisord keeps the process alive &#x2014; auto-restarts if the DVR daemon crashes&#13;
+Container-level restart: unless-stopped policy recovers from container failures&#13;
+Timezone configurable via the TZ environment variable&#13;
+Host networking for full HDHomeRun device discovery (UDP broadcast)</Overview>
+  <Category>MediaApp:Video MediaServer:Video Status:Stable</Category>
+  <WebUI/>
+  <TemplateURL/>
+  <Icon>https://play-lh.googleusercontent.com/P55MBwWNUuShnUN0lz1qqI-NMVVtXy7DKpzOgyQ3DHxeLS-jm2OWu56v4YJ2rl02EsAfo9vpJAa4kY-XwkNEv4M=w480-h960-rw</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1781121287</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires>A working HDHomeRun network tuner with up-to-date firmware (see below)</Requires>
+  <Config Name="Host Path 1" Target="/hdhomerun" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/Media/HDHomeRun/</Config>
+  <Config Name="65001" Target="65001" Default="" Mode="udp" Description="" Type="Port" Display="always" Required="false" Mask="false">65001</Config>
+  <TailscaleStateDir/>
+</Container>
