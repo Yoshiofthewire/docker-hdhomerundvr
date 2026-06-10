@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  hdhomerundvr:
+    build: .
+    container_name: hdhomerundvr
+    # Restart the container automatically if it crashes or the Docker daemon restarts.
+    # Change to "always" if you also want it to start on boot even after a manual stop.
+    restart: unless-stopped
+    # Host networking is required for HDHomeRun device discovery (UDP broadcast).
+    network_mode: host
+    volumes:
+      # Map your recordings path on the host to /hdhomerun inside the container.
+      - /mnt/user/recordings:/hdhomerun
+    environment:
+      - TZ=America/New_York

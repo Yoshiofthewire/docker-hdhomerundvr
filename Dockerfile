@@ -1,34 +1,41 @@
-FROM phusion/baseimage:0.9.16
-MAINTAINER Yoshiofthewire <Yoshi@urlxl.com>
-#Based on the work of gfjardim <gfjardim@gmail.com>
+FROM ubuntu:22.04
+LABEL maintainer="Yoshiofthewire <Yoshi@urlxl.com>"
+# Based on the work of gfjardim <gfjardim@gmail.com>
 
 #########################################
 ##        ENVIRONMENTAL CONFIG         ##
 #########################################
-# Set correct environment variables
-ENV HOME="/root" LC_ALL="C.UTF-8" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
+ENV HOME="/root" \
+    LC_ALL="C.UTF-8" \
+    LANG="en_US.UTF-8" \
+    LANGUAGE="en_US.UTF-8" \
+    DEBIAN_FRONTEND="noninteractive" \
+    TZ="UTC"
 
-# Use baseimage-docker's init system
-CMD ["/sbin/my_init"]
+#########################################
+##         SETUP DIRECTORIES           ##
+#########################################
+RUN mkdir -p /opt/hdhomerun /hdhomerun
 
+#########################################
+##         COPY FILES                  ##
+#########################################
+COPY hdhomerun.conf /etc/hdhomerun.conf
+COPY hdhomerun_record_x64 /opt/hdhomerun/hdhomerun_record_x64
+COPY hdhomerun_wrapper.sh /opt/hdhomerun/hdhomerun_wrapper.sh
+COPY supervisord.conf /etc/supervisord.conf
+COPY entrypoint.sh /entrypoint.sh
+COPY install.sh /install.sh
 
 #########################################
 ##         RUN INSTALL SCRIPT          ##
 #########################################
-
-RUN mkdir -p /opt/hdhomerun
-ADD hdhomerun.conf /etc/
-ADD install.sh /
-ADD hdhomerun_record_x64 /opt/hdhomerun/
 RUN bash /install.sh
-ADD supervisord.conf supervisord.conf
 
 #########################################
 ##         EXPORTS AND VOLUMES         ##
 #########################################
-
 VOLUME /hdhomerun
 EXPOSE 65001/udp 65002
 
-CMD ["-n", "-c", "/supervisord.conf"]
-ENTRYPOINT ["/usr/bin/supervisord"]
+ENTRYPOINT ["/entrypoint.sh"]
