@@ -27,11 +27,12 @@ apt-get install -qy supervisor tzdata procps
 chmod +x /opt/hdhomerun/hdhomerun_record_x64
 chmod +x /opt/hdhomerun/hdhomerun_wrapper.sh
 chmod +x /entrypoint.sh
+chown hdhomerun:hdhomerun /etc/hdhomerun.conf
 chmod 644 /etc/hdhomerun.conf
 
 # Ensure supervisor run directory exists
-mkdir -p /var/run /var/log/supervisor
-chown -R hdhomerun:hdhomerun /opt/hdhomerun /hdhomerun /var/log/supervisor
+mkdir -p /var/run/hdhomerun /var/log/supervisor
+chown -R hdhomerun:hdhomerun /opt/hdhomerun /hdhomerun /var/log/supervisor /var/run/hdhomerun
 
 #########################################
 ##                 CLEANUP             ##
