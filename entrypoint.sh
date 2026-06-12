@@ -21,6 +21,7 @@ fi
 
 mkdir -p /hdhomerun
 chmod 755 /hdhomerun
+chown hdhomerun:hdhomerun /hdhomerun || true
 
 #########################################
 ##          START SUPERVISORD          ##
