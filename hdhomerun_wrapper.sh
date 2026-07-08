@@ -1,7 +1,7 @@
 #!/bin/bash
 # Wrapper script for hdhomerun_record_x64.
-# Keeps supervisord satisfied by staying alive in the foreground
-# while monitoring the hdhomerun daemon process.
+# Stays alive in the foreground while monitoring the hdhomerun daemon process,
+# so entrypoint.sh can detect a crash and restart it.
 
 set -eo pipefail
 
@@ -37,7 +37,7 @@ echo "[wrapper] HDHomeRun DVR is running. Monitoring process..."
 # Monitor loop — exit non-zero so supervisord auto-restarts this wrapper
 while true; do
     if ! pgrep -f "hdhomerun_record" > /dev/null 2>&1; then
-        echo "[wrapper] ERROR: HDHomeRun DVR process is no longer running. Triggering supervisord restart..." >&2
+        echo "[wrapper] ERROR: HDHomeRun DVR process is no longer running. Triggering entrypoint restart..." >&2
         exit 1
     fi
     # Use background sleep + wait so the trap fires promptly on signals

@@ -3,15 +3,16 @@
 Docker container for the [HDHomeRun DVR Server](https://forum.silicondust.com/forum/viewtopic.php?f=126&t=20613) by SiliconDust.
 
 **HDHomeRun DVR Server version:** 20250815  
-**Base image:** ubuntu:22.04
+**Base image:** debian:bookworm-slim
 
 ---
 
 ## Features
 
 - Runs the HDHomeRun DVR recording engine inside a Docker container
-- `supervisord` keeps the process alive — auto-restarts if the DVR daemon crashes
+- `entrypoint.sh` keeps the process alive — auto-restarts if the DVR daemon crashes (up to 10 retries)
 - Container-level `restart: unless-stopped` policy recovers from container failures
+- Minimal image (no Python/supervisord) — the DVR daemon runs as an unprivileged user via `setpriv`
 - Timezone configurable via the `TZ` environment variable
 - Host networking for full HDHomeRun device discovery (UDP broadcast)
 
@@ -93,19 +94,19 @@ Before the first install or when updating firmware:
 
 ```mermaid
 flowchart TD
-    A[Docker container] --> B[supervisord\nPID 1, nodaemon=true]
-    B --> C[hdhomerun_wrapper.sh]
+    A[Docker container] --> B[entrypoint.sh\nPID 1]
+    B --> C[setpriv drops to hdhomerun user\nruns hdhomerun_wrapper.sh]
     C --> D[hdhomerun_record_x64 start\nStarts DVR daemon]
     C --> E[Monitors DVR process\nevery 15 seconds]
     E --> F[If the DVR process disappears, the wrapper exits non-zero]
-    F --> G[supervisord restarts the wrapper\nup to 10 retries]
-    H[SIGTERM from Docker] --> I[Wrapper calls hdhomerun_record_x64 stop]
+    F --> G[entrypoint.sh restarts the wrapper\nup to 10 retries]
+    H[SIGTERM from Docker] --> I[entrypoint.sh forwards TERM to the wrapper,\nwhich calls hdhomerun_record_x64 stop]
 ```
 
-- `supervisord` runs as PID 1 in the foreground (`nodaemon=true`), preventing spurious container exits.
-- `hdhomerun_wrapper.sh` wraps the DVR daemon (which forks to the background) and stays alive to monitor it.
-- If the DVR process disappears, the wrapper exits with a non-zero code so supervisord restarts it (up to 10 retries).
-- `SIGTERM` from Docker is caught cleanly — the wrapper calls `hdhomerun_record_x64 stop` before exiting.
+- `entrypoint.sh` runs as PID 1 in the foreground, preventing spurious container exits.
+- It uses `setpriv` to drop from root to the unprivileged `hdhomerun` user before running `hdhomerun_wrapper.sh`, which wraps the DVR daemon (which forks to the background) and stays alive to monitor it.
+- If the DVR process disappears, the wrapper exits with a non-zero code so `entrypoint.sh` restarts it (up to 10 retries).
+- `SIGTERM` from Docker is caught cleanly by `entrypoint.sh`, which forwards it to the wrapper — the wrapper calls `hdhomerun_record_x64 stop` before exiting.
 
 ---
 

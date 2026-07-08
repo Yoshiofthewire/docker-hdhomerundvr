@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM debian:bookworm-slim
 LABEL maintainer="Yoshiofthewire <Yoshi@urlxl.com>"
 # Based on the work of gfjardim <gfjardim@gmail.com>
 
@@ -23,7 +23,6 @@ RUN mkdir -p /opt/hdhomerun /hdhomerun
 COPY hdhomerun.conf /etc/hdhomerun.conf
 COPY hdhomerun_record_x64 /opt/hdhomerun/hdhomerun_record_x64
 COPY hdhomerun_wrapper.sh /opt/hdhomerun/hdhomerun_wrapper.sh
-COPY supervisord.conf /etc/supervisord.conf
 COPY entrypoint.sh /entrypoint.sh
 COPY install.sh /install.sh
 

@@ -18,7 +18,7 @@ chown -R hdhomerun:hdhomerun /home/hdhomerun
 #########################################
 
 apt-get -q update
-apt-get install -qy supervisor tzdata procps
+apt-get install -qy tzdata procps
 
 #########################################
 ##  FILES, SERVICES AND CONFIGURATION  ##
@@ -30,9 +30,7 @@ chmod +x /entrypoint.sh
 chown hdhomerun:hdhomerun /etc/hdhomerun.conf
 chmod 644 /etc/hdhomerun.conf
 
-# Ensure supervisor run directory exists
-mkdir -p /var/run/hdhomerun /var/log/supervisor
-chown -R hdhomerun:hdhomerun /opt/hdhomerun /hdhomerun /var/log/supervisor /var/run/hdhomerun
+chown -R hdhomerun:hdhomerun /opt/hdhomerun /hdhomerun
 
 #########################################
 ##                 CLEANUP             ##
