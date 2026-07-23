@@ -89,6 +89,29 @@ Before the first install or when updating firmware:
 
 ---
 
+## CI / Release Workflow
+
+This repository includes a GitHub Actions workflow at `.github/workflows/docker-release.yml`.
+
+On each push to `main` or manual dispatch, the workflow:
+
+- computes an auto-incrementing release version from the Git commit count
+- builds the Docker image
+- tags and pushes the image to Docker Hub
+- creates a Git tag like `v1.0.<commit_count>`
+- creates a GitHub release for the tag
+
+To allow Docker image publishing, configure these repository secrets:
+
+- `DOCKERHUB_USERNAME`
+- `DOCKERHUB_TOKEN`
+
+The built image is published as:
+
+- `docker.io/yoshiofthewire/hdhomerundvr:1.0.<commit_count>`
+- `docker.io/yoshiofthewire/hdhomerundvr:latest`
+
+---
 
 ## How It Works
 
