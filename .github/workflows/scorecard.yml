@@ -1,0 +1,47 @@
+# OpenSSF Scorecard: https://github.com/ossf/scorecard-action
+name: Scorecard supply-chain security
+on:
+  # Branch-Protection check only supports the default branch.
+  branch_protection_rule:
+  # Keeps the Maintained check fresh.
+  schedule:
+    - cron: '35 18 * * 5'
+  push:
+    branches: [ "master" ]
+
+permissions: read-all
+
+jobs:
+  analysis:
+    name: Scorecard analysis
+    runs-on: ubuntu-latest
+    # publish_results only works from the default branch.
+    if: github.event.repository.default_branch == github.ref_name
+    permissions:
+      security-events: write # upload to code scanning
+      id-token: write # publish results / badge
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: "Run analysis"
+        uses: ossf/scorecard-action@2d1146689b8cda280b9bc96326124645441f03bc # v2.4.4
+        with:
+          results_file: results.sarif
+          results_format: sarif
+          publish_results: true
+
+      - name: "Upload artifact"
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: SARIF file
+          path: results.sarif
+          retention-days: 5
+
+      - name: "Upload to code-scanning"
+        uses: github/codeql-action/upload-sarif@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
+        with:
+          sarif_file: results.sarif
